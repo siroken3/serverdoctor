@@ -4,20 +4,18 @@
         "describe": [
             {
                 "resource-type":"package",
+                "resource-name":"httpd",
                 "resource-body": [
                     {
-                        "resource-name":"httpd",
-                        "resource-body": {
-                            "it": [
-                                {
-                                    "should": [
-                                        {
-                                            "be_installed":{}
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
+                        "it": [
+                            {
+                                "should": [
+                                    {
+                                        "be_installed":{}
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
@@ -78,44 +76,44 @@
                 ]
             },
             {
-                "port": [
+                "resource-type": "port",
+                "resource-name":"80",
+                "resource-body": [
                     {
-                        "resource-name":"80",
-                        "resource-body": {
-                            "it": [
-                                {
-                                    "should": {
-                                        "be_listening":{}
-                                    }
+                        "it": [
+                            {
+                                "should": {
+                                    "be_listening":{}
                                 }
-                            ]
-                        }
+                            }
+                        ]
                     }
                 ]
             },
             {
-                "file": [
+                "resource-type": "file",
+                "resource-name": "/etc/httpd/conf/httpd.conf",
+                "resource-body": [
                     {
-                        "resource-name": "/etc/httpd/conf/httpd.conf",
-                        "resource-body": {
-                            "it": [
-                                {
+                        "it": [
+                            {
                                 "should": {
                                     "be_file": {}
                                 }
-                                }
-                            ],
-                            "its": [
-                                {
-                                    "param-name": ":content",
-                                    "body": {
-                                        "should": {
-                                            "match": "/ServerName www.example.jp/"
-                                        }
+                            }
+                        ]
+                    },
+                    {
+                        "its": [
+                            {
+                                "param-name": ":content",
+                                "body": {
+                                    "should": {
+                                        "match": "/ServerName www.example.jp/"
                                     }
                                 }
-                            ]
-                        }
+                            }
+                        ]
                     }
                 ]
             }
