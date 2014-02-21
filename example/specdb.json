@@ -1,0 +1,124 @@
+{
+    "spec":{
+        "spec-name": "httpd",
+        "describe": [
+            {
+                "resource-type":"package",
+                "resource-body": [
+                    {
+                        "resource-name":"httpd",
+                        "resource-body": {
+                            "it": [
+                                {
+                                    "should": [
+                                        {
+                                            "be_installed":{}
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "resource-type": "service",
+                "resource-name":"httpd",
+                "resource-body": [
+                    {
+                        "it": [
+                            {
+                                "should": [
+                                    {
+                                        "be_enabled":{}
+                                    },
+                                    {
+                                        "be_running":{}
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "resource-type": "service",
+                "resource-name":"sshd",
+                "resource-body": [
+                    {
+                        "it": [
+                            {
+                                "should": [
+                                    {
+                                        "be_enabled": {
+                                            "with_level": 4
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "resource-type": "service",
+                "resource-name": "invalid-daemon",
+                "resource-body": [
+                    {
+                        "it": [
+                            {
+                                "should_not": {
+                                    "be_enabled": {
+                                        "with_level": 4
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "port": [
+                    {
+                        "resource-name":"80",
+                        "resource-body": {
+                            "it": [
+                                {
+                                    "should": {
+                                        "be_listening":{}
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "file": [
+                    {
+                        "resource-name": "/etc/httpd/conf/httpd.conf",
+                        "resource-body": {
+                            "it": [
+                                {
+                                "should": {
+                                    "be_file": {}
+                                }
+                                }
+                            ],
+                            "its": [
+                                {
+                                    "param-name": ":content",
+                                    "body": {
+                                        "should": {
+                                            "match": "/ServerName www.example.jp/"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
